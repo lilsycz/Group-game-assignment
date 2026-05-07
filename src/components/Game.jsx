@@ -1,20 +1,18 @@
 import { useState, useEffect } from 'react'
 import gameData from '../data/gameData'
 
+  const LEVEL_TIME = {1:120, 2:90, 3:60}  // time rule for each level
+
 function Game() {
-  // startgame
+  // state
   const [cards, setCards] = useState([])
   const [flippedCards, setFlippedCards] = useState([])   // cards currently flipped, 3 max
   const [matchedCount, setMatchedCount] = useState(0)    // the number of matched sets
   const [isChecking, setIsChecking] = useState(false)    // in the middle of checking a match, to lock clicks
+  const [level, setLevel] = useState(1)  // level 1 by default
+  const [timeLeft, setTimeLeft] = useState(LEVEL_TIME[level])  // time left for current level
   const [gameStatus, setGameStatus] = useState('playing')  // 'playing' | 'won' | 'lost'
 
-
-  // initial shuffle
-  useEffect(() => {
-    const shuffled = [...gameData].sort(() => Math.random() - 0.5)
-    setCards(shuffled)
-  }, [])
 
   // win & lose rules
   useEffect(() => {
@@ -25,9 +23,12 @@ function Game() {
     if (timeLeft <= 0) setGameStatus('lost')
     }, [timeLeft])
 
+  // level change
+  useEffect(() => {
+    restartGame()
+  }, [level])
+
   // timer
-  const [timeLeft, setTimeLeft] = useState(60) // 60 seconds to win
-  
   useEffect(() => {
     if (gameStatus !== 'playing') return
     const timer = setInterval(() => {
@@ -102,7 +103,8 @@ function Game() {
     setMatchedCount(0)
     setIsChecking(false)
     setGameStatus('playing')
-  }
+    setTimeLeft(LEVEL_TIME[level])
+}
 
   // endgame
   if (gameStatus === 'won') {
