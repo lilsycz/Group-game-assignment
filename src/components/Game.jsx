@@ -7,19 +7,34 @@ function Game() {
   const [flippedCards, setFlippedCards] = useState([])   // cards currently flipped, 3 max
   const [matchedCount, setMatchedCount] = useState(0)    // the number of matched sets
   const [isChecking, setIsChecking] = useState(false)    // in the middle of checking a match, to lock clicks
-  const [gameWon, setGameWon] = useState(false)          // victory state
+  const [gameStatus, setGameStatus] = useState('playing')  // 'playing' | 'won' | 'lost'
 
-  // prepare
+
+  // initial shuffle
   useEffect(() => {
     const shuffled = [...gameData].sort(() => Math.random() - 0.5)
     setCards(shuffled)
   }, [])
 
+  // win & lose rules
   useEffect(() => {
-    if (matchedCount === 4) {
-      setGameWon(true)
-    }
-  }, [matchedCount])
+    if (matchedCount === 4) setGameStatus('won')
+    }, [matchedCount])
+
+  useEffect(() => {
+    if (timeLeft <= 0) setGameStatus('lost')
+    }, [timeLeft])
+
+  // timer
+  const [timeLeft, setTimeLeft] = useState(60) // 60 seconds to win
+  
+  useEffect(() => {
+    if (gameStatus !== 'playing') return
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => prev - 1)
+    }, 1000)
+    return () => clearInterval(timer)
+  }, [gameStatus])
 
   // update
   function handleCardClick(clickedCard) {
@@ -86,11 +101,11 @@ function Game() {
     setFlippedCards([])
     setMatchedCount(0)
     setIsChecking(false)
-    setGameWon(false)
+    setGameStatus('playing')
   }
 
   // endgame
-  if (gameWon) {
+  if (gameStatus === 'won') {
     return (
       <div className="game-won">
         <h1>🎉 You matched all cards!</h1>
@@ -142,5 +157,8 @@ function Game() {
     </div>
   )
 }
+
+
+
 
 export default Game
