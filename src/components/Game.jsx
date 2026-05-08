@@ -27,12 +27,12 @@ function Game() {
 
   // timer
   useEffect(() => {
-    if (gameStatus !== 'playing') return
+    if (gameStatus !== 'playing' || showExitConfirm) return
     const timer = setInterval(() => {
       setTimeLeft((prev) => prev - 1)
     }, 1000)
     return () => clearInterval(timer)
-  }, [gameStatus])
+  }, [gameStatus, showExitConfirm])
 
   // restart
   function restartGame() {
