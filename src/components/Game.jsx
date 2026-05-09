@@ -43,6 +43,8 @@ function Game() {
     setIsChecking(false)
     setGameStatus('playing')
     setTimeLeft(LEVEL_TIME[level])
+    setMoves(0)
+    setShowExitConfirm(false)
   }
 
   // level change
@@ -166,7 +168,7 @@ function Game() {
                 </div>
               ) : (
                 <div className="card-back">
-                  <span><img src={card.image} alt="Card Back" /></span>
+                  <span><img src={cardBack.image} alt="Card Back" /></span>
                 </div>
               )}
             </div>
