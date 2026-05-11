@@ -1,6 +1,4 @@
 import { useState, useEffect } from 'react'
-import gameData from '../data/gameData'
-// card images
 import gameData, { cardBackImages } from '../data/gameData'
 
 
