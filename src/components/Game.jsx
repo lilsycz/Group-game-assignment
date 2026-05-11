@@ -1,7 +1,32 @@
 import { useState, useEffect } from 'react'
 import gameData from '../data/gameData'
 
+// card front images
+import skaneImg from '<public />images/region-skane.jpg'
+import stockholmImg from '../images/region-stockholm.jpg'
+// ... 
+
+// card back images by type
+const cardBackImages = {
+  region: '../images/backRegion.jpg',
+  city: '../images/backCity.jpg',
+  animal: '../images/backAnimal.jpg',
+  signature: '../images/backSignature.jpg',
+}
+
+
+
 const LEVEL_TIME = {1:120, 2:90, 3:60}  // time rule for each level
+// shuffle cards and sort by type
+function getSortedCards() {
+  const typeOrder = ['region', 'city', 'animal', 'signature']
+  return [...gameData].sort((a, b) => {
+    if (a.type !== b.type) {
+      return typeOrder.indexOf(a.type) - typeOrder.indexOf(b.type)
+    }
+    return Math.random() - 0.5
+  })
+}
 
 function Game() {
   // -- state --
@@ -15,7 +40,11 @@ function Game() {
   const [gameStatus, setGameStatus] = useState('playing')  // 'playing' | 'won' | 'lost'
   const [showExitConfirm, setShowExitConfirm] = useState(false) //exit confirm window
 
-  //-- rules --
+  // -- init --
+  useEffect(() => {
+    setCards(getSortedCards())
+  }, [])
+
   // win & lose
   useEffect(() => {
     if (matchedCount === 4) setGameStatus('won')
@@ -34,10 +63,9 @@ function Game() {
     return () => clearInterval(timer)
   }, [gameStatus, showExitConfirm])
 
-  // restart
+  // reset states
   function restartGame() {
-    const shuffled = [...gameData].sort(() => Math.random() - 0.5)
-    setCards(shuffled)
+    setCards(getSortedCards())
     setFlippedCards([])
     setMatchedCount(0)
     setIsChecking(false)
@@ -116,39 +144,39 @@ function Game() {
   // -- html --
   return (
     <div className="game">
-      // --sidebar--
+      {/* sidebar */}
       <div className="sidebar">
         <h2 className="Logo">Swedish Match</h2>
-        // level select
+        {/* level select */}
         <div className="level-select">
           <button className={`level-btn ${level === 1 ? 'active' : ''}`} onClick={() => setLevel(1)}>1</button>
           <button className={`level-btn ${level === 2 ? 'active' : ''}`} onClick={() => setLevel(2)}>2</button>
           <button className={`level-btn ${level === 3 ? 'active' : ''}`} onClick={() => setLevel(3)}>3</button>
         </div>
-        // rules container
+        {/* rules container */}
         <div className="rules-container">
           {gameStatus === 'playing' && <p className="rules-text">Rules: ......</p>}
           {gameStatus === 'won' && <p className="success-text">SUCCESS!!</p>}
           {gameStatus === 'lost' && <p className="timeout-text">TIME OUT!</p>}
         </div>
-        // restart button
+        {/* restart button */}
         <button className="restart-btn" onClick={restartGame}>
           {gameStatus === 'playing' ? 'Restart' : 'Play Again'}
         </button>
-        // exit game button
+        {/* exit game button */}
         <button className="exitgame-btn" onClick={() => setShowExitConfirm(true)}>
           Exit Game
         </button>
       </div>
 
-      // --main game area--
+      {/* --main game area-- */}
       <div className="game-main">
         <div className="game-header">
           <p className="movesCount">Moves: {moves}</p>
           <p className="timeLeft">Time: {timeLeft}s</p>
         </div>
 
-        // card grid
+        {/* card grid */}
         <div className="card-grid">
           {cards.map((card) => (
             <div
@@ -168,7 +196,7 @@ function Game() {
                 </div>
               ) : (
                 <div className="card-back">
-                  <span><img src={cardBack.image} alt="Card Back" /></span>
+                   <img src={cardBackImages[card.type]} alt="card back" />
                 </div>
               )}
             </div>
@@ -176,7 +204,7 @@ function Game() {
         </div>
       </div>
 
-      // --exit confirm window--
+      {/* --exit confirm window-- */}
       {showExitConfirm && (
       <>
         <div className="overlay" />
