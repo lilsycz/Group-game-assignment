@@ -1,18 +1,7 @@
 import { useState, useEffect } from 'react'
 import gameData from '../data/gameData'
-
-// card front images
-import skaneImg from '<public />images/region-skane.jpg'
-import stockholmImg from '../images/region-stockholm.jpg'
-// ... 
-
-// card back images by type
-const cardBackImages = {
-  region: '../images/backRegion.jpg',
-  city: '../images/backCity.jpg',
-  animal: '../images/backAnimal.jpg',
-  signature: '../images/backSignature.jpg',
-}
+// card images
+import gameData, { cardBackImages } from '../data/gameData'
 
 
 

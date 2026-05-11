@@ -154,4 +154,11 @@ const gameData = [
   },
 ]
 
+export const cardBackImages = {
+  region: '/images/backRegion.jpg',
+  city: '/images/backCity.jpg',
+  animal: '/images/backAnimal.jpg',
+  signature: '/images/backSignature.jpg',
+}
+
 export default gameData
