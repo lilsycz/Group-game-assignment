@@ -1,0 +1,16 @@
+button {
+width: 204px;
+height: 52px;
+background-color: #FDC921;
+color: black;
+border-radius: 20px;
+border: none;
+box-shadow: 0px 2px 5px;
+font-size: 16px;
+}
+
+.level-btn {
+   height: 50px;
+   width: 50px;
+   border-radius: 25px;
+}
