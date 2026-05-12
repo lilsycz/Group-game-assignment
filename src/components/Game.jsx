@@ -144,7 +144,7 @@ function Game() {
     <div className="game">
       {/* sidebar */}
       <div className="sidebar">
-        <h2 className="Logo">Swedish Match</h2>
+        <h2 className="logo">Swedish Match</h2>
         {/* level select */}
         <div className="level-select">
           <button className={`level-btn ${level === 1 ? 'active' : ''}`} onClick={() => setLevel(1)}>1</button>
