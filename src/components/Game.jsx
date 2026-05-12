@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import gameData, { cardBackImages } from '../data/gameData'
-import '../styles/game.css'
+import '../styles/base.css'
 
 const LEVEL_TIME = {1:120, 2:90, 3:60}  // time rule for each level
 // shuffle cards and sort by type
