@@ -1,0 +1,47 @@
+/* Body text */
+.body-text {
+  font-family: "Lexend Deca", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: #000000;
+}
+
+/* Game name text */
+.swedish-match-text {
+  font-family: "Gajraj One", sans-serif;
+  font-weight: 400;
+  font-size: 32px;
+  color: #000000;
+}
+
+/* Timer text*/
+.timer-text {
+  font-family: "Lexend Exa", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: #000000;
+}
+
+/* Game title text*/
+.game-title-text {
+  font-family: "Lexend Exa", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: #000000;
+}
+
+/* Game rules text*/
+.rules-text {
+  font-family: "Lexend Deca", sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+  color: #000000;
+}
+
+/* Button text */
+.button-text {
+  font-family: "Intel One Mono", monospace;
+  font-weight: 400;
+  font-size: 16px;
+  color: #000000;
+}
