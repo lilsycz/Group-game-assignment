@@ -1,19 +1,28 @@
 import { useState, useEffect } from 'react'
 import gameData, { cardBackImages } from '../data/gameData'
-
-
+import '../styles/game.css'
 
 const LEVEL_TIME = {1:120, 2:90, 3:60}  // time rule for each level
 // shuffle cards and sort by type
 function getSortedCards() {
   const typeOrder = ['region', 'city', 'animal', 'signature']
-  return [...gameData].sort((a, b) => {
-    if (a.type !== b.type) {
-      return typeOrder.indexOf(a.type) - typeOrder.indexOf(b.type)
-    }
-    return Math.random() - 0.5
-  })
+  const regions = ['skane', 'vastragotaland', 'stockholm', 'norrbotten']
+
+  const shuffledPerType = typeOrder.map(() => 
+    [...regions].sort(() => Math.random() - 0.5)
+  )
+
+  const sorted = []
+  for (let row = 0; row < 4; row++) {
+    typeOrder.forEach((type, col) => {
+      const region = shuffledPerType[col][row]
+      const card = gameData.find(c => c.region === region && c.type === type)
+      if (card) sorted.push(card)
+    })
+  }
+  return sorted
 }
+
 
 function Game() {
   // -- state --
@@ -29,7 +38,8 @@ function Game() {
 
   // -- init --
   useEffect(() => {
-    setCards(getSortedCards())
+    const sorted = getSortedCards()
+    setCards(sorted)
   }, [])
 
   // win & lose
@@ -70,6 +80,7 @@ function Game() {
 
   // -- game logic --
   function handleCardClick(clickedCard) {
+    if (gameStatus !== 'playing') return
     if (clickedCard.isMatched) return 
     if (clickedCard.isFlipped) return
     if (isChecking) return
@@ -90,17 +101,17 @@ function Game() {
     const newFlipped = [...flippedCards, clickedCard]
     setFlippedCards(newFlipped)
 
-    // if flipped 3 cards, check for match
-    if (newFlipped.length === 3) {
+    // if flipped 4 cards, check for match
+    if (newFlipped.length === 4) {
       checkMatch(newFlipped, updatedCards)
     }
   }
-  // check if the 3 flipped cards match (same region)
+  // check if the 4 flipped cards match (same region)
   function checkMatch(flipped, currentCards) {
     setIsChecking(true)
 
-    const [a, b, c] = flipped
-    const isMatch = a.region === b.region && b.region === c.region
+    const [a, b, c, d] = flipped
+    const isMatch = a.region === b.region && b.region === c.region && c.region === d.region
 
     if (isMatch) {
       // yes, mark as isMatched
@@ -142,7 +153,16 @@ function Game() {
         </div>
         {/* rules container */}
         <div className="rules-container">
-          {gameStatus === 'playing' && <p className="rules-text">Rules: ......</p>}
+          {gameStatus === 'playing' && (
+            <div className="rules-text">
+              <p>How to Play:</p>
+              <ul>
+                <li>Flip one card from each column</li>
+                <li>All 3 cards must belong to the same region to match</li>
+                <li>Go before time runs out!</li>
+              </ul>
+            </div>
+          )}          
           {gameStatus === 'won' && <p className="success-text">SUCCESS!!</p>}
           {gameStatus === 'lost' && <p className="timeout-text">TIME OUT!</p>}
         </div>
