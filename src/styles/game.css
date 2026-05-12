@@ -1,9 +1,59 @@
 body {
   background-color: #FFFAEB;
+  height: 100%;
+  margin: 0;
+}
+
+.game {
+  margin: 20px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-self: center;
 }
 
 .card-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
+}
+
+.sidebar {
+  background-color: #6798C0;
+  border-radius: 20px;
+  width: 236px;
+  height: 631px;
+}
+
+.Logo {
+  margin-top: 36px;
+  color: black;
+  font-family: "Gajraj One", sans-serif;
+  font-size: 32px;
+}
+
+.level-select {
+  box-shadow: inset 0px 2px 5px #000000;
+  margin-top: 36px;
+  display: flex;
+  justify-self: center;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #99D6EA;
+  border-radius: 20px;
+  height: 120px;
+  width: 204px;
+}
+
+.rules-container {
+  box-shadow: inset 0px 2px 5px #000000;
+  margin-top: 36px;
+  display: flex;
+  justify-self: center;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #99D6EA;
+  border-radius: 20px;
+  height: 180px;
+  width: 204px;
 }
