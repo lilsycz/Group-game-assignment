@@ -1,7 +1,8 @@
 import { useState } from "react";
 
 /* ----------------------------------------------------
-	VALIDATION PATTERNS
+	  VALIDATION PATTERNS
+
     - Define RegEx patterns for valid username and
     password inputs
 ------------------------------------------------------- */
@@ -16,7 +17,21 @@ const validationPattern = {
 
 function Login() {
 	/* ----------------------------------------------------
-	VALIDATION: USERNAME
+    COMPONENT STATE
+
+    - Store values for username and password inputs
+    - Store error messages for username and password 
+      validation
+------------------------------------------------------- */
+
+	const [username, setUsername] = useState("");
+	const [password, setPassword] = useState("");
+	const [usernameError, setUsernameError] = useState("");
+	const [passwordError, setPasswordError] = useState("");
+
+	/* ----------------------------------------------------
+	  VALIDATION: USERNAME
+
     - Check length (3-20 characters)
     - Check for valid username characters
     - Display error message if validation fails
@@ -32,6 +47,38 @@ function Login() {
 
 		if (!isValidUsername) {
 			return "Please enter a valid username.";
+		}
+
+		return "";
+	}
+
+	/* ----------------------------------------------------
+	  VALIDATION: PASSWORD
+    
+    - Check for whitespace characters
+    - Check length (minimum 8 characters)
+    - Validate RegEx pattern for password
+    - Display error message if validation fails
+------------------------------------------------------- */
+
+	function validatePassword(password) {
+		const passwordHasSpaces = password.includes(" ");
+		const passwordLength = password.length;
+		const passwordHasUppercase = validationPattern.passwordUppercase.test(password);
+		const passwordHasLowercase = validationPattern.passwordLowercase.test(password);
+		const passwordHasNumber = validationPattern.passwordNumber.test(password);
+		const passwordHasSpecialCharacters = validationPattern.passwordSpecialCharacter.test(password);
+
+		if (passwordHasSpaces) {
+			return "Password cannot contain whitespace characters.";
+		}
+
+		if (passwordLength < 8) {
+			return "Password must be at least 8 characters.";
+		}
+
+		if (!(passwordHasUppercase && passwordHasLowercase && passwordHasNumber && passwordHasSpecialCharacters)) {
+			return "Password must include at least one uppercase letter, a lowercase letter, a number and a special character.";
 		}
 
 		return "";
