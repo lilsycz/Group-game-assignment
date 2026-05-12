@@ -6,7 +6,7 @@
   color: #000000;
 }
 
-/* Game name text */
+/* Logo text */
 .logo {
   font-family: "Gajraj One", sans-serif;
   font-weight: 400;
@@ -45,3 +45,10 @@
   font-size: 16px;
   color: #000000;
 }
+
+.success-text {
+  font-family: "Gajraj One", sans-serif;
+  font-weight: 400;
+  font-size: 36px;
+  color: #000000;
+    }
