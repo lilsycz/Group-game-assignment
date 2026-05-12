@@ -84,9 +84,75 @@ function Login() {
 		return "";
 	}
 
+	/* ----------------------------------------------------
+    SIGN UP HANDLER
+------------------------------------------------------- */
+
+	function handleSignUp(event) {
+		event.preventDefault();
+
+		const isUsernameValid = validateUsername(username);
+		const isPasswordValid = validatePassword(password);
+
+		const userAccount = {
+			username: username,
+			password: password,
+		};
+
+		localStorage.setItem("userAccount", JSON.stringify(userAccount));
+
+		setUsernameError(isUsernameValid);
+		setPasswordError(isPasswordValid);
+
+		if (isUsernameValid || isPasswordValid) {
+			return;
+		} else {
+			setSignUpMessage("Registration successful!");
+			setUsername("");
+			setPassword("");
+		}
+	}
+
+	/* ----------------------------------------------------
+    SIGN UP MESSAGE
+------------------------------------------------------- */
+
 	return (
 		<div>
-			<h1>Game-Login</h1>
+			<form className="" onSubmit={handleSignUp}>
+				<div className="">
+					<input
+						className=""
+						type="text"
+						id="signup-username"
+						value={username}
+						onChange={(event) => {
+							setUsername(event.target.value);
+							setUsernameError("");
+							setSignUpMessage("");
+						}}
+					/>
+
+					{usernameError && <p className="">{usernameError}</p>}
+				</div>
+
+				<div className="">
+					<input
+						className=""
+						type="password"
+						id="signup-password"
+						value={password}
+						onChange={(event) => {
+							setPassword(event.target.value);
+							setPasswordError("");
+							setSignUpMessage("");
+						}}
+					/>
+
+					{passwordError && <p className="">{passwordError}</p>}
+				</div>
+			</form>
+			{signUpMessage && <p className="">{signUpMessage}</p>}
 		</div>
 	);
 }
