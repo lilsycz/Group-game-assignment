@@ -1,10 +1,10 @@
 import { useState } from "react";
 
 /* ----------------------------------------------------
-	  VALIDATION PATTERNS
+	VALIDATION PATTERNS
 
     - Define RegEx patterns for valid username and
-    password inputs
+      password inputs
 ------------------------------------------------------- */
 
 const validationPattern = {
@@ -12,30 +12,34 @@ const validationPattern = {
 	passwordUppercase: /[A-Z]/, // At least one uppercase letter
 	passwordLowercase: /[a-z]/, // At least one lowercase letter
 	passwordNumber: /\d/, // At least one number
-	passwordSpecialCharacter: /[!@#$%^&*?_\-]/, // At least one special character
+	passwordSpecialCharacter: /[!@#$%^&*?_-]/, // At least one special character
 };
 
 function Login() {
 	/* ----------------------------------------------------
-    COMPONENT STATE
+		COMPONENT STATE STORAGE
 
-    - Store values for username and password inputs
-    - Store error messages for username and password 
-      validation
-------------------------------------------------------- */
+		- Values for username and password inputs
+		- Error messages for username and password 
+		  validation
+		- Messages for successful sign up and login
+	------------------------------------------------------- */
 
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [usernameError, setUsernameError] = useState("");
 	const [passwordError, setPasswordError] = useState("");
+	const [signUpMessage, setSignUpMessage] = useState("");
+	const [loginMessage, setLoginMessage] = useState("");
 
 	/* ----------------------------------------------------
-	  VALIDATION: USERNAME
+		USERNAME VALIDATION
 
-    - Check length (3-20 characters)
-    - Check for valid username characters
-    - Display error message if validation fails
-------------------------------------------------------- */
+		- Check length (3-20 characters)
+		- Check for valid characters
+		- Display error message if validation fails
+		- Return empty string if validation passes
+	------------------------------------------------------- */
 
 	function validateUsername(username) {
 		const usernameLength = username.length;
@@ -53,13 +57,14 @@ function Login() {
 	}
 
 	/* ----------------------------------------------------
-	  VALIDATION: PASSWORD
-    
-    - Check for whitespace characters
-    - Check length (minimum 8 characters)
-    - Validate RegEx pattern for password
-    - Display error message if validation fails
-------------------------------------------------------- */
+		PASSWORD VALIDATION
+		
+		- Check for whitespace characters
+		- Check length (minimum 8 characters)
+		- Validate RegEx pattern for password
+		- Display error message if validation fails
+		- Return empty string if validation passes
+	------------------------------------------------------- */
 
 	function validatePassword(password) {
 		const passwordHasSpaces = password.includes(" ");
@@ -85,14 +90,30 @@ function Login() {
 	}
 
 	/* ----------------------------------------------------
-    SIGN UP HANDLER
-------------------------------------------------------- */
+    	SIGN UP HANDLER
+
+		- Prevent default form submission behavior
+		- Pass username and password values to validation
+		  functions
+		- Set error messages based on validation results
+		- If validation fails, exit function
+		- If validation passes, create user account object
+		  and store in localStorage
+		- Display success message and clear input fields
+	------------------------------------------------------- */
 
 	function handleSignUp(event) {
 		event.preventDefault();
 
-		const isUsernameValid = validateUsername(username);
-		const isPasswordValid = validatePassword(password);
+		const usernameErrorMessage = validateUsername(username);
+		const passwordErrorMessage = validatePassword(password);
+
+		setUsernameError(usernameErrorMessage);
+		setPasswordError(passwordErrorMessage);
+
+		if (usernameErrorMessage || passwordErrorMessage) {
+			return;
+		}
 
 		const userAccount = {
 			username: username,
@@ -100,22 +121,49 @@ function Login() {
 		};
 
 		localStorage.setItem("userAccount", JSON.stringify(userAccount));
+		setSignUpMessage("Registration successful!");
+		setUsername("");
+		setPassword("");
+	}
 
-		setUsernameError(isUsernameValid);
-		setPasswordError(isPasswordValid);
+	/* ----------------------------------------------------
+    	LOGIN HANDLER
 
-		if (isUsernameValid || isPasswordValid) {
+		- Prevent default form submission behavior
+		- Retrieve existing user account from localStorage
+		- If account is not found, display error message 
+		  and exit function
+		- Compare username and password inputs with existing 
+		  account values
+		- If both username and password match, display
+		  success message
+		- If username or password do not match, display 
+		  error message
+	------------------------------------------------------- */
+
+	function handleLogin(event) {
+		event.preventDefault();
+
+		const existingAccount = JSON.parse(localStorage.getItem("userAccount"));
+
+		if (!existingAccount) {
+			setLoginMessage("No account found. Please create an account first.");
 			return;
+		}
+
+		const isUsernameMatch = existingAccount.username === username;
+		const isPasswordMatch = existingAccount.password === password;
+
+		if (isUsernameMatch && isPasswordMatch) {
+			setLoginMessage("Login successful!");
 		} else {
-			setSignUpMessage("Registration successful!");
-			setUsername("");
-			setPassword("");
+			setLoginMessage("Invalid username or password.");
 		}
 	}
 
 	/* ----------------------------------------------------
-    SIGN UP MESSAGE
-------------------------------------------------------- */
+    	SIGN UP MESSAGE
+	------------------------------------------------------- */
 
 	return (
 		<div>
@@ -151,8 +199,17 @@ function Login() {
 
 					{passwordError && <p className="">{passwordError}</p>}
 				</div>
+				<div className="">
+					<button className="" type="button" onClick={handleLogin}>
+						Log in
+					</button>
+					<button className="" type="submit" onSubmit={handleSignUp}>
+						Create Account
+					</button>
+					{loginMessage && <p className="">{loginMessage}</p>}
+					{signUpMessage && <p className="">{signUpMessage}</p>}
+				</div>
 			</form>
-			{signUpMessage && <p className="">{signUpMessage}</p>}
 		</div>
 	);
 }
