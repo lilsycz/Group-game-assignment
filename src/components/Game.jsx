@@ -158,7 +158,7 @@ function Game() {
               <p>How to Play:</p>
               <ul>
                 <li>Flip one card from each column</li>
-                <li>All 3 cards must belong to the same region to match</li>
+                <li>All 4 cards must belong to the same region to match</li>
                 <li>Go before time runs out!</li>
               </ul>
             </div>
