@@ -1,20 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from 'react-router-dom'
-
-/* ----------------------------------------------------
-	VALIDATION PATTERNS
-
-    - Define RegEx patterns for valid username and
-      password inputs
-------------------------------------------------------- */
-
-const validationPattern = {
-	username: /^[A-Za-z0-9_-]+$/, // Allows only letters, numbers, underscore and hyphen
-	passwordUppercase: /[A-Z]/, // At least one uppercase letter
-	passwordLowercase: /[a-z]/, // At least one lowercase letter
-	passwordNumber: /\d/, // At least one number
-	passwordSpecialCharacter: /[!@#$%^&*?_-]/, // At least one special character
-};
+import { useNavigate } from "react-router-dom";
 
 function Login() {
 	/* ----------------------------------------------------
@@ -24,6 +9,8 @@ function Login() {
 		- Error messages for username and password 
 		  validation
 		- Messages for successful sign up and login
+		- Navigation function from React Router to redirect 
+		  user to game page after successful login
 	------------------------------------------------------- */
 
 	const [username, setUsername] = useState("");
@@ -32,7 +19,22 @@ function Login() {
 	const [passwordError, setPasswordError] = useState("");
 	const [signUpMessage, setSignUpMessage] = useState("");
 	const [loginMessage, setLoginMessage] = useState("");
-  const navigate = useNavigate()
+	const navigate = useNavigate();
+
+	/* ----------------------------------------------------
+		VALIDATION PATTERNS
+
+		- Define RegEx patterns for valid username and
+		password inputs
+	------------------------------------------------------- */
+
+	const validationPattern = {
+		username: /^[A-Za-z0-9_-]+$/, // Allows only letters, numbers, underscore and hyphen
+		passwordUppercase: /[A-Z]/, // At least one uppercase letter
+		passwordLowercase: /[a-z]/, // At least one lowercase letter
+		passwordNumber: /\d/, // At least one number
+		passwordSpecialCharacter: /[!@#$%^&*?_-]/, // At least one special character
+	};
 
 	/* ----------------------------------------------------
 		USERNAME VALIDATION
@@ -158,6 +160,7 @@ function Login() {
 
 		if (isUsernameMatch && isPasswordMatch) {
 			setLoginMessage("Login successful!");
+
 			navigate("/game");
 		} else {
 			setLoginMessage("Invalid username or password.");
@@ -165,7 +168,7 @@ function Login() {
 	}
 
 	/* ----------------------------------------------------
-    	SIGN UP MESSAGE
+
 	------------------------------------------------------- */
 
 	return (
@@ -181,6 +184,7 @@ function Login() {
 							setUsername(event.target.value);
 							setUsernameError("");
 							setSignUpMessage("");
+							setLoginMessage("");
 						}}
 					/>
 
@@ -197,6 +201,7 @@ function Login() {
 							setPassword(event.target.value);
 							setPasswordError("");
 							setSignUpMessage("");
+							setLoginMessage("");
 						}}
 					/>
 
