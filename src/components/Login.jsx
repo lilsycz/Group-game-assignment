@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom'
 
 /* ----------------------------------------------------
 	VALIDATION PATTERNS
@@ -31,6 +32,7 @@ function Login() {
 	const [passwordError, setPasswordError] = useState("");
 	const [signUpMessage, setSignUpMessage] = useState("");
 	const [loginMessage, setLoginMessage] = useState("");
+  const navigate = useNavigate()
 
 	/* ----------------------------------------------------
 		USERNAME VALIDATION
@@ -156,6 +158,7 @@ function Login() {
 
 		if (isUsernameMatch && isPasswordMatch) {
 			setLoginMessage("Login successful!");
+			navigate("/game");
 		} else {
 			setLoginMessage("Invalid username or password.");
 		}
