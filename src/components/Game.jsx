@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import gameData, { cardBackImages } from '../data/gameData'
 import '../styles/game.css'
+import { useNavigate } from 'react-router-dom'
 
 const LEVEL_TIME = {1:120, 2:90, 3:60}  // time rule for each level
 // shuffle cards and sort by type
@@ -35,6 +36,7 @@ function Game() {
   const [moves, setMoves] = useState(0) // count how many moves player made
   const [gameStatus, setGameStatus] = useState('playing')  // 'playing' | 'won' | 'lost'
   const [showExitConfirm, setShowExitConfirm] = useState(false) //exit confirm window
+  const navigate = useNavigate() // for navigation
 
   // -- init --
   useEffect(() => {
@@ -158,7 +160,7 @@ function Game() {
               <p>How to Play:</p>
               <ul>
                 <li>Flip one card from each column</li>
-                <li>All 3 cards must belong to the same region to match</li>
+                <li>All 4 cards must belong to the same region to match</li>
                 <li>Go before time runs out!</li>
               </ul>
             </div>
@@ -217,7 +219,7 @@ function Game() {
         <div className="overlay" />
         <div className="exit-window">
           <p className="exit-window-text">Are you sure that you want to exit?</p>
-          <button className="exit-confirm-btn" onClick={() => alert('TODO: navigate to login page')}>
+          <button className="exit-confirm-btn" onClick={() => navigate('/login')}>
             Yes
           </button>
           <button className="exit-cancel-btn" onClick={() => setShowExitConfirm(false)}>
