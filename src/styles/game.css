@@ -4,6 +4,12 @@ body {
   margin: 0;
 }
 
+.game-main {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
 .game {
   margin: 20px;
   height: 100%;
@@ -56,4 +62,57 @@ body {
   border-radius: 20px;
   height: 180px;
   width: 204px;
+}
+
+.rules-text ul {
+  list-style: none;
+  text-align: left;
+  padding: 17px;
+  margin: 0;
+}
+
+.rules-text p {
+  text-align: left;
+  margin-left: 17px;
+  margin-top: 17px;
+} 
+
+.game-main {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+  margin-left: 24px;
+}
+
+.game-header {
+  display: flex;
+  gap: 16px;
+}
+
+.movesCount,
+.timeLeft {
+  font-family: "Lexend Exa", sans-serif;
+  font-size: 16px;
+  box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.25);
+  background-color: #FFDF99;
+  border-radius: 20px;
+  padding: 8px 20px;
+  margin: 0;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  height: 581px;
+}
+
+.card {
+  aspect-ratio: 4 / 3;
+  cursor: pointer;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 5px solid #6798C0;
+  background-color: #fff;
 }

@@ -10,6 +10,18 @@ font-size: 16px;
 font-family: "Intel One Mono", monospace;
 }
 
+.button_light {
+width: 204px;
+height: 52px;
+background-color: #FFDF99;
+color: black;
+border-radius: 20px;
+border: none;
+box-shadow: 0px 2px 5px;
+font-size: 16px;
+font-family: "Intel One Mono", monospace;
+}
+
 .level-btn {
 height: 50px;
 width: 50px;
