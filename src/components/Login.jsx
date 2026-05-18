@@ -168,8 +168,12 @@ function Login() {
 	}
 
 	/* ----------------------------------------------------
+		AUTHENTICATION FORM UI
 
+		- Shared form for both sign up and login
 	------------------------------------------------------- */
+	/* Temporary markup structure. Waiting for desgin/CSS 
+	work to be merged into the project */
 
 	return (
 		<div>
