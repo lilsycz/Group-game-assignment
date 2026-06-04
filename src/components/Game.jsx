@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import gameData, { cardBackImages } from '../data/gameData'
+import '../styles/base.css'
 import '../styles/game.css'
 import { useNavigate } from 'react-router-dom'
 
@@ -146,7 +147,7 @@ function Game() {
     <div className="game">
       {/* sidebar */}
       <div className="sidebar">
-        <h2 className="Logo">Swedish Match</h2>
+        <h2 className="Logo">SWEDISH MATCH</h2>
         {/* level select */}
         <div className="level-select">
           <button className={`level-btn ${level === 1 ? 'active' : ''}`} onClick={() => setLevel(1)}>1</button>
@@ -173,45 +174,45 @@ function Game() {
           {gameStatus === 'playing' ? 'Restart' : 'Play Again'}
         </button>
         {/* exit game button */}
-        <button className="exitgame-btn" onClick={() => setShowExitConfirm(true)}>
+        <button className="button_light" onClick={() => setShowExitConfirm(true)}>
           Exit Game
         </button>
       </div>
 
-      {/* --main game area-- */}
-      <div className="game-main">
-        <div className="game-header">
-          <p className="movesCount">Moves: {moves}</p>
-          <p className="timeLeft">Time: {timeLeft}s</p>
-        </div>
-
-        {/* card grid */}
-        <div className="card-grid">
-          {cards.map((card) => (
-            <div
-              key={card.id}
-              className={`card 
-                ${card.isFlipped ? 'flipped' : ''} 
-                ${card.isMatched ? 'matched' : ''}
-                ${card.type}
-              `}
-              onClick={() => handleCardClick(card)}
-            >
-              {card.isFlipped ? (
-                <div className="card-front">
-                  <img src={card.image} alt={card.name} />
-                  <p>{card.name}</p>
-                  <span className="card-type">{card.type}</span>
-                </div>
-              ) : (
-                <div className="card-back">
-                   <img src={cardBackImages[card.type]} alt="card back" />
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
+        {/* --main game area-- */}
+    <div className="game-main">
+      <div className="game-header">
+        <p className="movesCount">Moves: {moves}</p>
+        <p className="timeLeft">Time: {timeLeft}s</p>
       </div>
+
+      {/* card grid */}
+      <div className="card-grid">
+        {cards.map((card) => (
+          <div
+            key={card.id}
+            className={`card 
+              ${card.isFlipped ? 'flipped' : ''} 
+              ${card.isMatched ? 'matched' : ''}
+              ${card.type}
+            `}
+            onClick={() => handleCardClick(card)}
+         >
+            {card.isFlipped ? (
+              <div className="card-front">
+                <img src={card.image} alt={card.name} />
+                <p>{card.name}</p>
+                <span className="card-type">{card.type}</span>
+              </div>
+            ) : (
+              <div className="card-back">
+                <img src={cardBackImages[card.type]} alt="card back" />
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
 
       {/* --exit confirm window-- */}
       {showExitConfirm && (
@@ -222,7 +223,7 @@ function Game() {
           <button className="exit-confirm-btn" onClick={() => navigate('/login')}>
             Yes
           </button>
-          <button className="exit-cancel-btn" onClick={() => setShowExitConfirm(false)}>
+          <button className="button_light" onClick={() => setShowExitConfirm(false)}>
             No
           </button>
         </div>
