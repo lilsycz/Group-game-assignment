@@ -2,25 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-  return (
-    <div className="login-page">
-
-      <div className="login-logo">
-        <span>Swedish Match</span>
-      </div>
-
-      <div className="login-card">
-        <input type="username" placeholder="Username" className="text-body" />
-        <input type="password" placeholder="Password" className="text-body" />
-      </div>
-
-      <div className="login-buttons">
-        <button className="text-button btn-primary">Log in</button>
-        <button className="text-button btn-secondary">Create account</button>
-      </div>
-
-    </div>
-  )
 	/* ----------------------------------------------------
 		COMPONENT STATE STORAGE
 
@@ -195,13 +176,19 @@ function Login() {
 	work to be merged into the project */
 
 	return (
-		<div>
-			<form className="" onSubmit={handleSignUp}>
+		<div className="login-page">
+
+			<div className="login-logo">
+				<span>Swedish Match</span>
+			</div>
+
+			<form className="login-card" onSubmit={handleSignUp}>
 				<div className="">
 					<input
-						className=""
+						className="text-body"
 						type="text"
 						id="signup-username"
+						placeholder="Username"
 						value={username}
 						onChange={(event) => {
 							setUsername(event.target.value);
@@ -216,9 +203,10 @@ function Login() {
 
 				<div className="">
 					<input
-						className=""
+						className="text-body"
 						type="password"
 						id="signup-password"
+						placeholder="Password"
 						value={password}
 						onChange={(event) => {
 							setPassword(event.target.value);
@@ -230,12 +218,12 @@ function Login() {
 
 					{passwordError && <p className="">{passwordError}</p>}
 				</div>
-				<div className="">
-					<button className="" type="button" onClick={handleLogin}>
+				<div className="login-buttons">
+					<button className="text-button btn-primary" type="button" onClick={handleLogin}>
 						Log in
 					</button>
-					<button className="" type="submit" onSubmit={handleSignUp}>
-						Create Account
+					<button className="text-button btn-secondary" type="submit">
+						Create account
 					</button>
 					{loginMessage && <p className="">{loginMessage}</p>}
 					{signUpMessage && <p className="">{signUpMessage}</p>}
