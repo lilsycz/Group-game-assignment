@@ -5,7 +5,7 @@ function Login() {
   return (
     <div className="login-page">
 
-      <div className="logo">
+      <div className="login-logo">
         <span>Swedish Match</span>
       </div>
 
