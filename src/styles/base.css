@@ -1,6 +1,8 @@
-@import "game.css";
-@import "buttons.css";
-@import "cards.css";
+
 @import "colors.css";
 @import "fonts.css";
+@import "login.css";
+@import "game.css";
+@import "buttons.css";
 @import "inputs.css";
+@import "cards.css";

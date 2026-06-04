@@ -10,16 +10,22 @@ font-size: 16px;
 font-family: "Intel One Mono", monospace;
 }
 
+button:hover {
+  box-shadow: 1px 4px 10px;
+}
+
 .button_light {
 width: 204px;
 height: 52px;
-background-color: #FFDF99;
+background-color: #FFF2CD;
 color: black;
 border-radius: 20px;
 border: none;
 box-shadow: 0px 2px 5px;
 font-size: 16px;
 font-family: "Intel One Mono", monospace;
+margin-bottom: 35px;
+justify-self: center;
 }
 
 .level-btn {
@@ -28,4 +34,9 @@ width: 50px;
 border-radius: 25px;
 font-family: "Gajraj One", sans-serif;
 font-size: 32px;
+}
+
+.restart-btn {
+  margin-top: 17px;
+  margin-bottom: 13px;
 }
