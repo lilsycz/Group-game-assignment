@@ -5,9 +5,18 @@ import '../styles/game.css'
 import { useNavigate } from 'react-router-dom'
 
 const LEVEL_TIME = {1:120, 2:90, 3:60}  // time rule for each level
+
+const TYPE_ORDER = ['region', 'city', 'animal', 'signature']
+const TYPE_LABELS = {
+  region: 'Region',
+  city: 'Biggest City',
+  animal: 'Animal',
+  signature: 'Signature',
+}
+
 // shuffle cards and sort by type
 function getSortedCards() {
-  const typeOrder = ['region', 'city', 'animal', 'signature']
+  const typeOrder = TYPE_ORDER
   const regions = ['skane', 'vastragotaland', 'stockholm', 'norrbotten']
 
   const shuffledPerType = typeOrder.map(() => 
@@ -145,6 +154,7 @@ function Game() {
   // -- html --
   return (
     <div className="game">
+      <div className="game-content">
       {/* sidebar */}
       <div className="sidebar">
         <h2 className="Logo">SWEDISH MATCH</h2>
@@ -188,31 +198,33 @@ function Game() {
 
       {/* card grid */}
       <div className="card-grid">
-        {cards.map((card) => (
-          <div
-            key={card.id}
-            className={`card 
-              ${card.isFlipped ? 'flipped' : ''} 
-              ${card.isMatched ? 'matched' : ''}
-              ${card.type}
-            `}
-            onClick={() => handleCardClick(card)}
-         >
-            {card.isFlipped ? (
-              <div className="card-front">
-                <img src={card.image} alt={card.name} />
-                <p>{card.name}</p>
-                <span className="card-type">{card.type}</span>
+        {TYPE_ORDER.map((type) => (
+          <div className={`card-column ${type}`} key={type}>
+            <h3 className="column-title">{TYPE_LABELS[type]}</h3>
+            {cards.filter((c) => c.type === type).map((card) => (
+              <div
+                key={card.id}
+                className={`card ${card.isFlipped ? 'flipped' : ''} ${card.isMatched ? 'matched' : ''} ${card.type}`}
+                onClick={() => handleCardClick(card)}
+              >
+                {card.isFlipped ? (
+                  <div className="card-front">
+                    <img src={card.image} alt={card.name} />
+                    <p>{card.name}</p>
+                    <span className="card-type">{card.type}</span>
+                  </div>
+                ) : (
+                  <div className="card-back">
+                    <img src={cardBackImages[card.type]} alt="card back" />
+                  </div>
+                )}
               </div>
-            ) : (
-              <div className="card-back">
-                <img src={cardBackImages[card.type]} alt="card back" />
-              </div>
-            )}
+            ))}
           </div>
         ))}
       </div>
     </div>
+      </div>{/* end game-content */}
 
       {/* --exit confirm window-- */}
       {showExitConfirm && (
