@@ -210,8 +210,6 @@ function Game() {
                 {card.isFlipped ? (
                   <div className="card-front">
                     <img src={card.image} alt={card.name} />
-                    <p>{card.name}</p>
-                    <span className="card-type">{card.type}</span>
                   </div>
                 ) : (
                   <div className="card-back">
