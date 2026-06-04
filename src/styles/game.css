@@ -160,6 +160,7 @@
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s ease;
   display: flex;
+  position: relative;
 }
 
 .card:hover {
@@ -171,9 +172,22 @@
 .card.signature { border-color: #2A6FA7; }
 
 .card-front {
+  display: none;
   flex: 1;
   position: relative;
   overflow: hidden;
+}
+
+.card.flipped .card-front {
+  display: flex;
+}
+
+.card.flipped .card-back {
+  display: none;
+}
+
+.card.region .card-front img {
+  object-fit: contain;
 }
 
 .card-front img {
@@ -186,9 +200,6 @@
   display: block;
 }
 
-.card.region .card-front img {
-  object-fit: contain;
-}
 
 .card-back {
   flex: 1;

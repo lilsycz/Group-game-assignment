@@ -4,10 +4,10 @@ import cardBlue2 from '../assets/cards/card_blue2.svg'
 import cardBlue3 from '../assets/cards/card_blue3.svg'
 import cardBlue4 from '../assets/cards/card_blue4.svg'
 
-import mapSkane          from '../assets/maps/map_skane.svg'
-import mapVastragotaland from '../assets/maps/map_vastragotaland.svg'
-import mapStockholm      from '../assets/maps/map_stockholm.svg'
-import mapNorrbotten     from '../assets/maps/map_norrbotten.svg'
+import regionSkane          from '../assets/images/region/Skåne.jpg'
+import regionVastragotaland from '../assets/images/region/Västra_Götaland.jpg'
+import regionStockholm      from '../assets/images/region/Stockholm.jpg'
+import regionNorrbotten     from '../assets/images/region/Norrbotten.jpg'
 
 import cityMalmo      from '../assets/images/city/malmo.svg'
 import cityGothenburg from '../assets/images/city/gothenburg.svg'
@@ -29,7 +29,7 @@ const gameData = [
   {
     id: 1,
     name: "Skåne",
-    image: mapSkane,
+    image: regionSkane,
     region: "skane",
     type: "region",
     isFlipped: false,
@@ -38,7 +38,7 @@ const gameData = [
   {
     id: 2,
     name: "Västra Götaland",
-    image: mapVastragotaland,
+    image: regionVastragotaland,
     region: "vastragotaland",
     type: "region",
     isFlipped: false,
@@ -47,7 +47,7 @@ const gameData = [
   {
     id: 3,
     name: "Stockholm",
-    image: mapStockholm,
+    image: regionStockholm,
     region: "stockholm",
     type: "region",
     isFlipped: false,
@@ -56,7 +56,7 @@ const gameData = [
   {
     id: 4,
     name: "Norrbotten",
-    image: mapNorrbotten,
+    image: regionNorrbotten,
     region: "norrbotten",
     type: "region",
     isFlipped: false,
