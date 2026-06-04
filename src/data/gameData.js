@@ -1,5 +1,9 @@
 // src/data/gameData.js
-                                    
+import cardBlue1 from '../assets/cards/card_blue1.svg'
+import cardBlue2 from '../assets/cards/card_blue2.svg'
+import cardBlue3 from '../assets/cards/card_blue3.svg'
+import cardBlue4 from '../assets/cards/card_blue4.svg'
+
 const gameData = [
   // ── REGION CARDS ──
   {
@@ -155,10 +159,10 @@ const gameData = [
 ]
 
 export const cardBackImages = {
-  region: '/images/backRegion.jpg',
-  city: '/images/backCity.jpg',
-  animal: '/images/backAnimal.jpg',
-  signature: '/images/backSignature.jpg',
+  region: cardBlue1,
+  city: cardBlue2,
+  animal: cardBlue3,
+  signature: cardBlue4,
 }
 
 export default gameData
