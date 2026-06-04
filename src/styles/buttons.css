@@ -1,6 +1,22 @@
+.text-button {
+width: 48%;
+height: 52px;
+background-color: #FDC921;
+color: black;
+border-radius: 20px;
+border: none;
+box-shadow: 0px 2px 5px;
+font-size: 16px;
+font-family: "Intel One Mono", monospace;
+}
+
+.btn-primary {
+background-color: #FDC921;
+}
+
 button {
 width: 204px;
-height: 52px;
+height: 42px;
 background-color: #FDC921;
 color: black;
 border-radius: 20px;
@@ -12,6 +28,11 @@ font-family: "Intel One Mono", monospace;
 
 button:hover {
   box-shadow: 1px 4px 10px;
+}
+
+button:active {
+  transform: translateY(2px);
+  box-shadow: 0px 2px 5px, inset 0px 2px 4px rgba(0,0,0,0.15);
 }
 
 .button_light {

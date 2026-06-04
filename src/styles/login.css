@@ -12,7 +12,7 @@
 
 .login-logo {
     font-weight: 100;
-    margin-top: 36px;
+    margin-top: -50px;
     color: black;
     font-family: "Gajraj One", sans-serif;
     font-size: 32px;
@@ -25,8 +25,8 @@
 }
 
 .login-card {
-    height: 210px;
-    max-width: 630px;
+    height: 260px;
+    max-width: 650px;
     width: 100%;
     background-color: #FFDF99;
     border-radius: 20px;
@@ -36,6 +36,10 @@
     justify-content: space-evenly;
     align-items: center;
     margin-bottom: 30px; 
+}
+
+.login-card > div {
+    width: 80%;
 }
 
 .login-buttons {

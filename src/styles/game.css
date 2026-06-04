@@ -68,6 +68,7 @@
   border-radius: 20px;
   height: 180px;
   width: 204px;
+  padding: 16px 0;
 }
 
 .rules-text ul {
@@ -75,12 +76,16 @@
   text-align: left;
   padding: 17px;
   margin: 0;
+  font-family: "Lexend Exa", sans-serif;
+  font-size: 14px;
 }
 
 .rules-text p {
   text-align: left;
   margin-left: 17px;
   margin-top: 17px;
+  font-family: "Lexend Exa", sans-serif;
+  font-size: 14px;
 } 
 
 .game-main {
@@ -93,6 +98,13 @@
 .game-header {
   display: flex;
   gap: 16px;
+}
+
+.timeout-text,
+.success-text {
+  font-family: "Lexend Exa", sans-serif;
+  font-size: 16px;
+  margin: 0;
 }
 
 .movesCount,
