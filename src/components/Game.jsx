@@ -3,6 +3,7 @@ import gameData, { cardBackImages } from '../data/gameData'
 import '../styles/base.css'
 import '../styles/game.css'
 import { useNavigate } from 'react-router-dom'
+import { playClick, playShortClick } from '../utils/playClick'
 
 const LEVEL_TIME = {1:120, 2:90, 3:60}  // time rule for each level
 
@@ -48,6 +49,7 @@ function Game() {
   const [showExitConfirm, setShowExitConfirm] = useState(false) //exit confirm window
   const navigate = useNavigate() // for navigation
 
+
   // -- init --
   useEffect(() => {
     const sorted = getSortedCards()
@@ -56,12 +58,18 @@ function Game() {
 
   // win & lose
   useEffect(() => {
-    if (matchedCount === 4) setGameStatus('won')
-    }, [matchedCount])
+    if (matchedCount === 4) {
+      setGameStatus('won')
+      new Audio('/success.wav').play().catch(() => {})
+    }
+  }, [matchedCount])
 
   useEffect(() => {
-    if (timeLeft <= 0) setGameStatus('lost')
-    }, [timeLeft])
+    if (timeLeft <= 0) {
+      setGameStatus('lost')
+      new Audio('/timeout.wav').play().catch(() => {})
+    }
+  }, [timeLeft])
 
   // timer
   useEffect(() => {
@@ -93,9 +101,10 @@ function Game() {
   // -- game logic --
   function handleCardClick(clickedCard) {
     if (gameStatus !== 'playing') return
-    if (clickedCard.isMatched) return 
+    if (clickedCard.isMatched) return
     if (clickedCard.isFlipped) return
     if (isChecking) return
+    playClick()
     // flip 1 card only from the same type
     const sameTypeAlreadyFlipped = flippedCards.some(
       (card) => card.type === clickedCard.type
@@ -160,9 +169,9 @@ function Game() {
         <h2 className="Logo">SWEDISH MATCH</h2>
         {/* level select */}
         <div className="level-select">
-          <button className={`level-btn ${level === 1 ? 'active' : ''}`} onClick={() => setLevel(1)}>1</button>
-          <button className={`level-btn ${level === 2 ? 'active' : ''}`} onClick={() => setLevel(2)}>2</button>
-          <button className={`level-btn ${level === 3 ? 'active' : ''}`} onClick={() => setLevel(3)}>3</button>
+          <button className={`level-btn ${level === 1 ? 'active' : ''}`} onClick={() => { playShortClick(); setLevel(1) }}>1</button>
+          <button className={`level-btn ${level === 2 ? 'active' : ''}`} onClick={() => { playShortClick(); setLevel(2) }}>2</button>
+          <button className={`level-btn ${level === 3 ? 'active' : ''}`} onClick={() => { playShortClick(); setLevel(3) }}>3</button>
         </div>
         {/* rules container */}
         <div className="rules-container">
@@ -180,11 +189,11 @@ function Game() {
           {gameStatus === 'lost' && <p className="timeout-text">TIME OUT!</p>}
         </div>
         {/* restart button */}
-        <button className="restart-btn" onClick={restartGame}>
+        <button className="restart-btn" onClick={() => { playShortClick(); restartGame() }}>
           {gameStatus === 'playing' ? 'Restart' : 'Play Again'}
         </button>
         {/* exit game button */}
-        <button className="button_light" onClick={() => setShowExitConfirm(true)}>
+        <button className="button_light" onClick={() => { playShortClick(); setShowExitConfirm(true) }}>
           Exit Game
         </button>
       </div>
@@ -228,10 +237,10 @@ function Game() {
         <div className="exit-window">
           <p className="exit-window-text">Are you sure that you want to exit?</p>
           <div className='exit-window-buttons'>
-            <button className="exit-confirm-btn" onClick={() => navigate('/')}>
+            <button className="exit-confirm-btn" onClick={() => { playShortClick(); navigate('/') }}>
               Yes
             </button>
-            <button className="button_light" onClick={() => setShowExitConfirm(false)}>
+            <button className="button_light" onClick={() => { playShortClick(); setShowExitConfirm(false) }}>
               No
             </button>
           </div>
