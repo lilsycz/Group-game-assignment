@@ -1,11 +1,35 @@
 // src/data/gameData.js
-                                    
+import cardBlue1 from '../assets/cards/card_blue1.svg'
+import cardBlue2 from '../assets/cards/card_blue2.svg'
+import cardBlue3 from '../assets/cards/card_blue3.svg'
+import cardBlue4 from '../assets/cards/card_blue4.svg'
+
+import regionSkane          from '../assets/images/region/Skåne.png'
+import regionVastragotaland from '../assets/images/region/Västra_Götaland.png'
+import regionStockholm      from '../assets/images/region/Stockholm.png'
+import regionNorrbotten     from '../assets/images/region/Norrbotten.png'
+
+import cityMalmo      from '../assets/images/city/malmo.svg'
+import cityGothenburg from '../assets/images/city/gothenburg.svg'
+import cityStockholm  from '../assets/images/city/stockholm.svg'
+import cityLulea      from '../assets/images/city/lulea.svg'
+
+import animalWhiteCrane from '../assets/images/animal/White Crane.jpg'
+import animalSeal       from '../assets/images/animal/Seal.jpg'
+import animalRadjur     from '../assets/images/animal/Rådjur.jpg'
+import animalMoose      from '../assets/images/animal/Moose.jpg'
+
+import sigSkane       from '../assets/images/signature/skanebryggan.jpg'
+import sigGoteborg    from '../assets/images/signature/goteborg.jpg'
+import sigStockholm   from '../assets/images/signature/stockholm.jpg'
+import sigNorrsken    from '../assets/images/signature/norrsken.jpg'
+
 const gameData = [
   // ── REGION CARDS ──
   {
     id: 1,
     name: "Skåne",
-    image:  "/images/skane-region.jpg" ,
+    image: regionSkane,
     region: "skane",
     type: "region",
     isFlipped: false,
@@ -14,7 +38,7 @@ const gameData = [
   {
     id: 2,
     name: "Västra Götaland",
-    image: "/images/vastragotaland-region.jpg",
+    image: regionVastragotaland,
     region: "vastragotaland",
     type: "region",
     isFlipped: false,
@@ -23,7 +47,7 @@ const gameData = [
   {
     id: 3,
     name: "Stockholm",
-    image: "/images/stockholm-region.jpg",
+    image: regionStockholm,
     region: "stockholm",
     type: "region",
     isFlipped: false,
@@ -32,7 +56,7 @@ const gameData = [
   {
     id: 4,
     name: "Norrbotten",
-    image: "/images/norrbotten-region.jpg",
+    image: regionNorrbotten,
     region: "norrbotten",
     type: "region",
     isFlipped: false,
@@ -43,7 +67,7 @@ const gameData = [
   {
     id: 5,
     name: "malmö",
-    image: "/images/skane-city.jpg",
+    image: cityMalmo,
     region: "skane",
     type: "city",
     isFlipped: false,
@@ -52,7 +76,7 @@ const gameData = [
   {
     id: 6,
     name: "Gothenburg",
-    image: "/images/vastragotaland-city.jpg",
+    image: cityGothenburg,
     region: "vastragotaland",
     type: "city",
     isFlipped: false,
@@ -61,7 +85,7 @@ const gameData = [
   {
     id: 7,
     name: "Stockholm",
-    image: "/images/stockholm-city.jpg",
+    image: cityStockholm,
     region: "stockholm",
     type: "city",
     isFlipped: false,
@@ -70,7 +94,7 @@ const gameData = [
   {
     id: 8,
     name: "luleå",
-    image: "/images/norrbotten-city.jpg",
+    image: cityLulea,
     region: "norrbotten",
     type: "city",
     isFlipped: false,
@@ -81,7 +105,7 @@ const gameData = [
   {
     id: 9,
     name: "White Crane",
-    image: "/images/skane-animal.jpg",
+    image: animalWhiteCrane,
     region: "skane",
     type: "animal",
     isFlipped: false,
@@ -90,7 +114,7 @@ const gameData = [
   {
     id: 10,
     name: "Seal",
-    image: "/images/vastragotaland-animal.jpg",
+    image: animalSeal,
     region: "vastragotaland",
     type: "animal",
     isFlipped: false,
@@ -99,7 +123,7 @@ const gameData = [
   {
     id: 11,
     name: "Rådjur",
-    image: "/images/stockholm-animal.jpg",
+    image: animalRadjur,
     region: "stockholm",
     type: "animal",
     isFlipped: false,
@@ -108,7 +132,7 @@ const gameData = [
   {
     id: 12,
     name: "Moose",
-    image: "/images/norrbotten-animal.jpg",
+    image: animalMoose,
     region: "norrbotten",
     type: "animal",
     isFlipped: false,
@@ -119,7 +143,7 @@ const gameData = [
      {
     id: 13,
     name: "oresund bridge",
-    image: "/images/skane-signature.jpg",
+    image: sigSkane,
     region: "skane",
     type: "signature",
     isFlipped: false,
@@ -128,7 +152,7 @@ const gameData = [
   {
     id: 14,
     name: "tram",
-    image: "/images/vastragotaland-signature.jpg",
+    image: sigGoteborg,
     region: "vastragotaland",
     type: "signature",
     isFlipped: false,
@@ -137,7 +161,7 @@ const gameData = [
   {
     id: 15,
     name: "nobel prize",
-    image: "/images/stockholm-signature.jpg",
+    image: sigStockholm,
     region: "stockholm",
     type: "signature",
     isFlipped: false,
@@ -146,7 +170,7 @@ const gameData = [
   {
     id: 16,
     name: "aurora",
-    image: "/images/norrbotten-signature.jpg",
+    image: sigNorrsken,
     region: "norrbotten",
     type: "signature",
     isFlipped: false,
@@ -155,10 +179,10 @@ const gameData = [
 ]
 
 export const cardBackImages = {
-  region: '/images/backRegion.jpg',
-  city: '/images/backCity.jpg',
-  animal: '/images/backAnimal.jpg',
-  signature: '/images/backSignature.jpg',
+  region: cardBlue1,
+  city: cardBlue2,
+  animal: cardBlue3,
+  signature: cardBlue4,
 }
 
 export default gameData
