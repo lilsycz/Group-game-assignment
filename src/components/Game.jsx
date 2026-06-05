@@ -207,15 +207,12 @@ function Game() {
                 className={`card ${card.isFlipped ? 'flipped' : ''} ${card.isMatched ? 'matched' : ''} ${card.type}`}
                 onClick={() => handleCardClick(card)}
               >
-                {card.isFlipped ? (
-                  <div className="card-front">
-                    <img src={card.image} alt={card.name} />
-                  </div>
-                ) : (
-                  <div className="card-back">
-                    <img src={cardBackImages[card.type]} alt="card back" />
-                  </div>
-                )}
+                <div className="card-front">
+                  <img src={card.image} alt={card.name} />
+                </div>
+                <div className="card-back">
+                  <img src={cardBackImages[card.type]} alt="card back" />
+                </div>
               </div>
             ))}
           </div>

@@ -13,14 +13,16 @@
   display: flex;
   align-items: stretch;
   gap: 24px;
+  width: 100%;
+  max-width: 1200px;
 }
 
 .game-main {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  max-width: 900px;
-  width: 100%;
+  flex: 1;
+  min-width: 0;
 }
 
 
@@ -29,6 +31,7 @@
   border-radius: 20px;
   width: 236px;
   height: fit-content;
+  min-height: 600px;
   box-shadow: inset 0px 6px 16px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
@@ -93,7 +96,7 @@
   font-family: "Lexend Exa", sans-serif;
   font-size: 14px;
   font-weight: bold;
-} 
+}
 
 .game-main {
   display: flex;
@@ -136,6 +139,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
   background-color: #FFDF99;
   border-radius: 20px;
   padding: 12px;
@@ -151,6 +155,7 @@
 }
 
 .card {
+  width: 95%;
   aspect-ratio: 7 / 5;
   cursor: pointer;
   border-radius: 20px;
@@ -186,9 +191,6 @@
   display: none;
 }
 
-.card.region .card-front img {
-  object-fit: contain;
-}
 
 .card-front img {
   position: absolute;
