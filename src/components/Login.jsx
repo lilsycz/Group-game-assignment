@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { playShortClick } from "../utils/playClick";
 
 function Login() {
 	/* ----------------------------------------------------
@@ -219,10 +220,10 @@ function Login() {
 					{passwordError && <p className="">{passwordError}</p>}
 				</div>
 				<div className="login-buttons">
-					<button className="text-button btn-primary" type="button" onClick={handleLogin}>
+					<button className="text-button btn-primary" type="button" onClick={(e) => { playShortClick(); handleLogin(e) }}>
 						Log in
 					</button>
-					<button className="text-button btn-secondary" type="submit">
+					<button className="text-button btn-secondary" type="submit" onClick={playShortClick}>
 						Create account
 					</button>
 					{loginMessage && <p className="">{loginMessage}</p>}
