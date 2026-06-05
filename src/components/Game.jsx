@@ -228,7 +228,7 @@ function Game() {
         <div className="exit-window">
           <p className="exit-window-text">Are you sure that you want to exit?</p>
           <div className='exit-window-buttons'>
-            <button className="exit-confirm-btn" onClick={() => navigate('/login')}>
+            <button className="exit-confirm-btn" onClick={() => navigate('/')}>
               Yes
             </button>
             <button className="button_light" onClick={() => setShowExitConfirm(false)}>
