@@ -5,9 +5,15 @@ import '../styles/game.css'
 import { useNavigate } from 'react-router-dom'
 import { playClick, playShortClick } from '../utils/playClick'
 
-const LEVEL_TIME = {1:120, 2:90, 3:60}  // time rule for each level
+const LEVEL_TIME = {1:60, 2:90, 3:120}  // time rule for each level (more cards -> more time)
 
 const TYPE_ORDER = ['region', 'city', 'animal', 'signature']
+// which card types (columns) are open on each level — difficulty grows gradually
+const LEVEL_TYPES = {
+  1: ['region', 'city'],
+  2: ['region', 'city', 'animal'],
+  3: ['region', 'city', 'animal', 'signature'],
+}
 const TYPE_LABELS = {
   region: 'Region',
   city: 'Biggest City',
@@ -16,17 +22,16 @@ const TYPE_LABELS = {
 }
 
 // shuffle cards and sort by type
-function getSortedCards() {
-  const typeOrder = TYPE_ORDER
+function getSortedCards(types = TYPE_ORDER) {
   const regions = ['skane', 'vastragotaland', 'stockholm', 'norrbotten']
 
-  const shuffledPerType = typeOrder.map(() => 
+  const shuffledPerType = types.map(() =>
     [...regions].sort(() => Math.random() - 0.5)
   )
 
   const sorted = []
   for (let row = 0; row < 4; row++) {
-    typeOrder.forEach((type, col) => {
+    types.forEach((type, col) => {
       const region = shuffledPerType[col][row]
       const card = gameData.find(c => c.region === region && c.type === type)
       if (card) sorted.push(card)
@@ -49,10 +54,11 @@ function Game() {
   const [showExitConfirm, setShowExitConfirm] = useState(false) //exit confirm window
   const navigate = useNavigate() // for navigation
 
+  const activeTypes = LEVEL_TYPES[level]  // card types (columns) open on current level
 
   // -- init --
   useEffect(() => {
-    const sorted = getSortedCards()
+    const sorted = getSortedCards(activeTypes)
     setCards(sorted)
   }, [])
 
@@ -82,7 +88,7 @@ function Game() {
 
   // reset states
   function restartGame() {
-    setCards(getSortedCards())
+    setCards(getSortedCards(activeTypes))
     setFlippedCards([])
     setMatchedCount(0)
     setIsChecking(false)
@@ -122,17 +128,16 @@ function Game() {
     const newFlipped = [...flippedCards, clickedCard]
     setFlippedCards(newFlipped)
 
-    // if flipped 4 cards, check for match
-    if (newFlipped.length === 4) {
+    // if one card per open column is flipped, check for match
+    if (newFlipped.length === activeTypes.length) {
       checkMatch(newFlipped, updatedCards)
     }
   }
-  // check if the 4 flipped cards match (same region)
+  // check if all flipped cards match (same region)
   function checkMatch(flipped, currentCards) {
     setIsChecking(true)
 
-    const [a, b, c, d] = flipped
-    const isMatch = a.region === b.region && b.region === c.region && c.region === d.region
+    const isMatch = flipped.every((card) => card.region === flipped[0].region)
 
     if (isMatch) {
       // yes, mark as isMatched
@@ -180,7 +185,7 @@ function Game() {
               <p>How to Play:</p>
               <ul>
                 <li>Flip one card from each column</li>
-                <li>All 4 cards must belong to the same region to match</li>
+                <li>The content of the cards must belong to the same region to match</li>
                 <li>Go before time runs out!</li>
               </ul>
             </div>
@@ -207,7 +212,7 @@ function Game() {
 
       {/* card grid */}
       <div className="card-grid">
-        {TYPE_ORDER.map((type) => (
+        {activeTypes.map((type) => (
           <div className={`card-column ${type}`} key={type}>
             <h3 className="column-title">{TYPE_LABELS[type]}</h3>
             {cards.filter((c) => c.type === type).map((card) => (
