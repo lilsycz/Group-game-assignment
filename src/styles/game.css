@@ -12,7 +12,7 @@
 .game-content {
   display: flex;
   align-items: stretch;
-  gap: 24px;
+  gap: 48px;   /* space between sidebar and cards (keeps level-3 first column off the bar) */
   width: 100%;
   max-width: 1200px;
 }
@@ -30,6 +30,7 @@
   background-color: #6798C0;
   border-radius: 20px;
   width: 236px;
+  margin-left: -24px;   /* nudge the blue bar a little to the left */
   height: fit-content;
   min-height: 600px;
   box-shadow: inset 0px 6px 16px rgba(0, 0, 0, 0.5);
@@ -132,10 +133,12 @@
   display: flex;
   gap: 16px;
   flex: 1;
+  justify-content: center;   /* center columns when fewer than 4 (levels 1 & 2) */
 }
 
 .card-column {
-  flex: 1;
+  /* always level-3 width: 4 columns share the row with 3 gaps of 16px (=48px) */
+  flex: 0 0 calc((100% - 48px) / 4);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -156,7 +159,7 @@
 
 .card {
   width: 95%;
-  aspect-ratio: 7 / 5;
+  aspect-ratio: 7 / 4.5;   /* slightly shorter cards so rows aren't cramped */
   cursor: pointer;
   border-radius: 20px;
   overflow: hidden;
@@ -351,6 +354,7 @@
     gap: 8px;
     overflow-x: auto;
     padding-bottom: 4px;
+    justify-content: flex-start;   /* avoid clipped/unreachable columns when scrolling */
   }
 
   .card-column {
